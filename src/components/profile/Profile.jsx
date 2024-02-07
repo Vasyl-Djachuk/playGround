@@ -1,30 +1,24 @@
 // import clsx from 'clsx';
+import { useState } from 'react';
 import css from './Profile.module.css';
 
-export const Profile = ({ name, tag, location, image, stats }) => {
-  return (
-    <div className={css.profile}>
-      <div className={css.description}>
-        <img src={image} alt="User avatar" className={css.avatar} />
-        <p className={css.name}>{name}</p>
-        <p className={css.tag}>@{tag}</p>
-        <p className={css.tag}>{location}</p>
-      </div>
+export const Profile = () => {
+  const [clicks, setClicks] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
 
-      <ul className={css.stats}>
-        <li className={css.item}>
-          <span className={css.label}>Followers</span>
-          <span className={css.value}>{stats.followers}</span>
-        </li>
-        <li className={css.item}>
-          <span className={css.label}>Views</span>
-          <span className={css.value}>{stats.views}</span>
-        </li>
-        <li className={css.item}>
-          <span className={css.label}>Likes</span>
-          <span className={css.value}>{stats.likes}</span>
-        </li>
-      </ul>
-    </div>
+  const handleClick = () => {
+    setClicks(clicks + 1);
+  };
+
+  const handleToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
+  return (
+    <>
+      <button onClick={handleClick}>Current: {clicks}</button>
+      <button onClick={handleToggle}>{isOpen ? 'Hide' : 'Show'}</button>
+      {isOpen && <p>Now you can see me!</p>}
+    </>
   );
 };
